@@ -22,7 +22,7 @@ def merge_multiple_dataframe(input_dir: str, output_dir: str) -> DataFrame:
     df = pd.concat(map(pd.read_csv, datasets))
 
     os.makedirs(output_dir, exist_ok=True)
-    output_path = f"{output_dir}/ingestedfiles_{time.strftime('%d%m%y%H%M%S')}.txt"
+    output_path = f"{output_dir}/ingestedfiles_{time.strftime('%y%m%d%H%M%S')}.txt"
     with open(output_path, "w") as f:
         print(f"Writing list of ingested files to {output_path}")
         f.write("\n".join(datasets))
@@ -58,7 +58,9 @@ def main():
     concat_df = merge_multiple_dataframe(input_folder_path, output_folder_path)
     cleaned_df = clean_dataset(concat_df)
 
-    output_df_path = f"{output_folder_path}/finaldata_{time.strftime('%d%m%y%H%M%S')}.csv"
+    output_df_path = os.path.join(
+        output_folder_path, f"finaldata_{time.strftime('%y%m%d%H%M%S')}.csv"
+    )
     print(f"Writing cleaned DataFrame to {output_df_path}")
     cleaned_df.to_csv(output_df_path, index=False)
 
