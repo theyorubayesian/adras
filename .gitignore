@@ -4,7 +4,4 @@
 /env
 
 *__pycache__
-/ingesteddata/
-/production_deployment/
-/practicemodels/
-/models/
+.env

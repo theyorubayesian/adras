@@ -2,7 +2,7 @@ import datetime
 
 import click
 from crontab import CronTab
-from crontab import CronItem
+# from crontab import CronItem
 
 
 @click.group()
@@ -12,7 +12,7 @@ def cli(ctx):
 
     cron = CronTab(user=True)
     ctx.obj['cron'] = cron
-    ctx.obj['default_command'] = 'python -m scripts.fullprocess'
+    ctx.obj['default_command'] = 'cd /Users/theyorubayesian/Desktop/Work/Udacity/adras; zsh automate.sh'
     ctx.obj['default_comment'] = ''
     ctx.obj['default_refresh_minutes'] = 10
 
@@ -27,18 +27,19 @@ def add_cron_job(
         command,
         comment,
         refresh_minutes
-) -> CronItem:
-    cron = ctx.obj['cron']
-    command = command or ctx.obj['default_command']
-    comment = comment or ctx.obj['default_comment']
-    refresh_minutes = refresh_minutes or ctx.obj['default_refresh_minutes']
-
-    job = cron.new(command=command, comment=comment)
-    job.minute.every(refresh_minutes)
-    cron.write('cronjob')
-    ctx.obj[f'job_{command}_{refresh_minutes}m'] = job
-    print(job)
-    return job
+):
+    # TODO: Investigate why this does not add a job to cron
+    # cron = ctx.obj['cron']
+    # command = command or ctx.obj['default_command']
+    # comment = comment or ctx.obj['default_comment']
+    # refresh_minutes = refresh_minutes or ctx.obj['default_refresh_minutes']
+    raise NotImplementedError
+    # job = cron.new(command=command, comment=comment)
+    # job.minute.every(refresh_minutes)
+    # cron.write('mlops_cronjob')
+    # ctx.obj[f'job_{command}_{refresh_minutes}m'] = job
+    # print(job)
+    # return job
 
 
 @cli.command()

@@ -15,7 +15,7 @@ def store_production_files(dst: str, *args) -> None:
     """
     os.makedirs(dst, exist_ok=True)
     for f in args:
-        filename = f.split('\\')[1]
+        filename = f.split(os.sep)[1]
         new_filename = filename.split('_')[0] + '.' + filename.split('.')[-1]
         path = os.path.join(dst, new_filename)
         print(f'Copying {f} to {path}')

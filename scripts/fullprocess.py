@@ -18,6 +18,7 @@ def check_new_files(dataset_dir: str, ingestion_record: str) -> bool:
     :param ingestion_record: File containing list of already ingested datasets
     :return: True if new files exist in dataset_dir else False
     """
+    print('Checking for new files...')
     with open(ingestion_record, 'r') as f:
         ingested_files = f.read().splitlines()
 
@@ -33,6 +34,7 @@ def check_model_drift(metric_file: str) -> Tuple[bool, float, float]:
     :param metric_file: File containing old F1-Score
     :return: New F1-Score > Old F1-Score, new F1-Score, old F1-Score
     """
+    print('Checking for model drift...')
     with open(metric_file, 'r') as f:
         old_f1_score = float(f.readline().strip())
 
@@ -66,8 +68,8 @@ def main():
         exit()
 
     deploy()
-    report(output_dir='models')
-    make_api_calls(output_dir=model_path)
+    report()
+    make_api_calls()
 
 
 if __name__ == '__main__':

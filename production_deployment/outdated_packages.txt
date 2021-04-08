@@ -1,0 +1,5 @@
+Package    Version             Latest Type
+---------- ------------------- ------ -----
+idna       2.10                3.1    wheel
+Pillow     8.1.2               8.2.0  wheel
+setuptools 49.6.0.post20210108 54.2.0 wheel

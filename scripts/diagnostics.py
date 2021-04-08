@@ -52,6 +52,13 @@ def dataframe_summary(data: DataFrame) -> list:
 
 
 def clean_up_diagnostic_files(start_time: str, end_time: str, folder: str) -> None:
+    """
+    Clean up files creating during diagnosis
+    :param start_time: Start time of diagnostic operation in strftime('%y%m%d%H%M%S')
+    :param end_time: End time of diagnostic operation in strftime(''%y%m%d%H%M%S')
+    :param folder: Folder to which files were written
+    :return: None
+    """
     for f in os.listdir(folder):
         if f'_{time.strftime("%y")}' not in f:
             continue
@@ -107,16 +114,15 @@ def get_outdated_packages_list(output_dir: str) -> str:
         check=True,
         text=True
     )
-    output = process.stdout
-    print(output)
+    print(process.stdout)
 
     outdated_packages_file = os.path.join(
         output_dir, "outdated_packages.txt"
     )
     with open(outdated_packages_file, 'w') as f:
         print(f"Writing list of outdated packages to {outdated_packages_file}")
-        f.write(process.stdout)
-    return process.stdout
+        f.write(str(process.stdout))
+    return str(process.stdout)
 
 
 def main():
